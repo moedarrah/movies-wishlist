@@ -1,7 +1,7 @@
 {
   "name": "mern-app",
   "version": "1.0.0",
-  "description": "movies watchlist using MERN (MongoDB, Express, React, Node)",
+  "description": "movies wishlist using MERN (MongoDB, Express, React, Node)",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
