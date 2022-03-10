@@ -1,1 +1,1 @@
-movies wishlist using MERN (MongoDB, Express, React, Node)
+A movies wishlist using MERN (MongoDB, Express, React, Node)
