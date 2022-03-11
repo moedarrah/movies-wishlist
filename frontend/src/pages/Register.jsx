@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { register, reset} from '../features/auth/authSlice'
 import { Form, Input, Button, Card } from 'antd'
 
 export const Register = () => {
@@ -10,7 +13,24 @@ export const Register = () => {
     password2: '',
   })
   /* const { username, email, password, password2 } = formDate */
-  console.log(formDate)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.auth
+  )
+  useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+    if(isSuccess || user){
+      navigate('/dashboard')
+    }
+
+    dispatch(reset())
+    
+  }, [user, isError, isSuccess, message, navigate, dispatch ])
+  
 
   const onValuesChange = (allValues) => {
     setFormDate(allValues)
@@ -20,7 +40,12 @@ export const Register = () => {
       if ( values.password !== values.password2 ) {
             alert('Passwords do not match')
         } else {
-   console.log('Success:', values);
+   const userDate = {
+      username: values.username,
+      email: values.email,
+      password: values.password,
+   }
+    dispatch(register(userDate))
 }
   }
 

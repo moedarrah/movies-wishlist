@@ -2,12 +2,14 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const user = require('../models/userModel')
+const res = require('express/lib/response')
 
 // @desc Register new user
 // @route POST /api/users
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body
+  console.log(req.body)
   if (!name || !email || !password) {
     res.status(400)
     throw new Error('Please enter all fields')
@@ -38,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 })
 
+
 // @desc login user
 // @route POST /api/users/login
 // @access public
@@ -55,7 +58,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (userExist && (await bcrypt.compare(password, userExist.password))) {
     res.status(200).json({
       _id: userExist.id,
-      name: userExist.name,
+      username: userExist.name,
       email: userExist.email,
       token: generateToken(userExist.id),
     })

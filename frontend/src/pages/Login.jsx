@@ -1,9 +1,17 @@
-import React from 'react'
+import React,{ useState} from 'react'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Card, Space } from 'antd';
 import { Link } from 'react-router-dom'
 
-export const login = (props) => {
+export const Login = (props) => {
+    const [formDate, setFormDate] = useState({
+        email: '',
+        password: '',
+      })
+
+      const onValuesChange = (allValues) => {
+        setFormDate(allValues)
+        }
     
         const onFinish = (values) => {
           console.log('Success:', values);
@@ -30,6 +38,7 @@ export const login = (props) => {
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+        onValuesChange={onValuesChange}
       autoComplete="off"
     >
       <Form.Item
@@ -83,4 +92,4 @@ const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
